@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Stars 6 - Module 3: London Trip | Mr. Mohamed Abdalla Abo Fahad</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F0Fdf4;
+        }
+        .soft-card {
+            background: #ffffff;
+            border: 2px solid #DCFCE7;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.08);
+        }
+        .badge-pill {
+            background-color: #FEF9E7;
+            border: 1px solid #F9E79F;
+            color: #7D6608;
+        }
+        .tab-btn {
+            transition: all 0.25s ease;
+            border: 2px solid #A7F3D0;
+            background-color: #ffffff;
+            color: #065F46;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #047857 0%, #10B981 100%);
+            color: white !important;
+            border-color: #047857 !important;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F0FDF4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A7F3D0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-6 px-3 sm:px-6">
+
+    <div class="max-w-4xl mx-auto space-y-5">
+
+        <!-- Header Card -->
+        <div class="soft-card rounded-3xl p-5 sm:p-7 text-center relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-emerald-100 pb-5">
+                <!-- Logo & School Name -->
+                <div class="flex items-center gap-3">
+                    <div class="w-14 h-14 bg-emerald-600 text-white rounded-2xl flex items-center justify-center font-black text-2xl shadow-md">
+                        ب
+                    </div>
+                    <div class="text-left">
+                        <h2 class="text-lg font-bold text-slate-800 leading-tight">AL-BAYARIQ</h2>
+                        <p class="text-xs font-semibold tracking-wider text-slate-500 uppercase">Private Schools</p>
+                    </div>
+                </div>
+
+                <!-- Main Title Section -->
+                <div class="text-center sm:text-right">
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-[#065F46] tracking-tight">Top Stars 6 – Module 3</h1>
+                    <div class="mt-1 inline-block badge-pill px-4 py-1 rounded-full text-xs sm:text-sm font-bold">
+                        Top Stars: London Trip (US vs UK English)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prepared By Sub Card -->
+            <div class="mt-4 bg-emerald-50/80 border border-emerald-100 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="text-left">
+                    <span class="inline-block bg-amber-200/80 text-amber-900 text-xs font-extrabold px-3 py-0.5 rounded-full uppercase">
+                        KSA Edition Student's Book - Pages 32-33
+                    </span>
+                    <h3 class="text-lg sm:text-xl font-extrabold text-[#065F46] mt-1">
+                        Prepared by: Mr. Mohamed Abdalla Abo Fahad
+                    </h3>
+                </div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-emerald-200">
+                    <i class="fa-solid fa-star text-amber-400"></i>
+                    <span class="text-xs font-bold text-slate-700">Total Score: <span id="globalScoreDisplay" class="text-emerald-700 text-base font-extrabold">0</span>/15</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Input Section -->
+        <div class="soft-card rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4">
+            <div class="flex-1 w-full">
+                <label for="studentName" class="block text-sm font-bold text-[#065F46] mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-user-graduate text-emerald-600"></i> Student Name:
+                </label>
+                <input 
+                    type="text" 
+                    id="studentName" 
+                    placeholder="Type your full name here..." 
+                    class="w-full px-4 py-2.5 rounded-xl border-2 border-emerald-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none text-slate-700 font-semibold text-base transition-all"
+                    oninput="updateStudentName()"
+                />
+            </div>
+            <div class="text-xs text-slate-500 font-medium sm:w-56 bg-emerald-50 p-3 rounded-xl border border-emerald-100">
+                <i class="fa-solid fa-circle-info text-emerald-600"></i> Type your name to personalize your progress and final performance certificate.
+            </div>
+        </div>
+
+        <!-- Section Navigation Tabs -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn active rounded-xl p-3 text-center font-bold text-xs sm:text-sm">
+                <i class="fa-solid fa-book-bookmark mb-1 text-base block"></i> 1. Vocabulary Match
+            </button>
+            <button onclick="switchTab('story')" id="tab-story" class="tab-btn rounded-xl p-3 text-center font-bold text-xs sm:text-sm">
+                <i class="fa-solid fa-plane-departure mb-1 text-base block"></i> 2. London Dialogue
+            </button>
+            <button onclick="switchTab('usuk')" id="tab-usuk" class="tab-btn rounded-xl p-3 text-center font-bold text-xs sm:text-sm">
+                <i class="fa-solid fa-language mb-1 text-base block"></i> 3. US vs UK English
+            </button>
+            <button onclick="switchTab('survey')" id="tab-survey" class="tab-btn rounded-xl p-3 text-center font-bold text-xs sm:text-sm">
+                <i class="fa-solid fa-comments mb-1 text-base block"></i> 4. Have You Ever...?
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: VOCABULARY MATCHING (SECTION 2) -->
+        <div id="content-vocab" class="soft-card rounded-3xl p-5 sm:p-7 space-y-5">
+            <div class="border-b border-emerald-100 pb-3 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-[#065F46]"><i class="fa-solid fa-spell-check text-emerald-600 mr-2"></i>1. Words & Definitions (Exercise 2)</h2>
+                    <p class="text-xs text-slate-500">Listen to each word and select the correct definition letter (A - E).</p>
+                </div>
+            </div>
+
+            <!-- Definitions Key Box -->
+            <div class="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-200 text-xs sm:text-sm space-y-1.5 font-medium text-slate-700">
+                <p><strong>A.</strong> to describe something so that it is easy to understand</p>
+                <p><strong>B.</strong> a product or food that is famous in a specific place because it is very good</p>
+                <p><strong>C.</strong> in or to another country</p>
+                <p><strong>D.</strong> a place on a road where cars must stop to allow people to walk across</p>
+                <p><strong>E.</strong> from a certain area or region of a country</p>
+            </div>
+
+            <!-- Matching Rows -->
+            <div class="space-y-3">
+                <!-- Word 1 -->
+                <div class="p-3.5 bg-white rounded-xl border border-emerald-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <button onclick="speak('abroad')" class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-bold hover:bg-emerald-200 transition-colors">
+                            <i class="fa-solid fa-volume-high mr-1"></i> Listen
+                        </button>
+                        <span class="font-bold text-slate-800 text-base">1. abroad</span>
+                    </div>
+                    <select id="match-1" class="p-2 border-2 border-emerald-200 rounded-lg font-semibold text-xs sm:text-sm outline-none text-slate-700 focus:border-emerald-500">
+                        <option value="">-- Select Definition --</option>
+                        <option value="A">A - to describe something easily</option>
+                        <option value="B">B - famous product/food</option>
+                        <option value="C">C - in or to another country</option>
+                        <option value="D">D - pedestrian road crossing</option>
+                        <option value="E">E - from a certain area</option>
+                    </select>
+                </div>
+
+                <!-- Word 2 -->
+                <div class="p-3.5 bg-white rounded-xl border border-emerald-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <button onclick="speak('explain')" class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-bold hover:bg-emerald-200 transition-colors">
+                            <i class="fa-solid fa-volume-high mr-1"></i> Listen
+                        </button>
+                        <span class="font-bold text-slate-800 text-base">2. explain</span>
+                    </div>
+                    <select id="match-2" class="p-2 border-2 border-emerald-200 rounded-lg font-semibold text-xs sm:text-sm outline-none text-slate-700 focus:border-emerald-500">
+                        <option value="">-- Select Definition --</option>
+                        <option value="A">A - to describe something easily</option>
+                        <option value="B">B - famous product/food</option>
+                        <option value="C">C - in or to another country</option>
+                        <option value="D">D - pedestrian road crossing</option>
+                        <option value="E">E - from a certain area</option>
+                    </select>
+                </div>
+
+                <!-- Word 3 -->
+                <div class="p-3.5 bg-white rounded-xl border border-emerald-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <button onclick="speak('crosswalk')" class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-bold hover:bg-emerald-200 transition-colors">
+                            <i class="fa-solid fa-volume-high mr-1"></i> Listen
+                        </button>
+                        <span class="font-bold text-slate-800 text-base">3. crosswalk</span>
+                    </div>
+                    <select id="match-3" class="p-2 border-2 border-emerald-200 rounded-lg font-semibold text-xs sm:text-sm outline-none text-slate-700 focus:border-emerald-500">
+                        <option value="">-- Select Definition --</option>
+                        <option value="A">A - to describe something easily</option>
+                        <option value="B">B - famous product/food</option>
+                        <option value="C">C - in or to another country</option>
+                        <option value="D">D - pedestrian road crossing</option>
+                        <option value="E">E - from a certain area</option>
+                    </select>
+                </div>
+
+                <!-- Word 4 -->
+                <div class="p-3.5 bg-white rounded-xl border border-emerald-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <button onclick="speak('local')" class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-bold hover:bg-emerald-200 transition-colors">
+                            <i class="fa-solid fa-volume-high mr-1"></i> Listen
+                        </button>
+                        <span class="font-bold text-slate-800 text-base">4. local</span>
+                    </div>
+                    <select id="match-4" class="p-2 border-2 border-emerald-200 rounded-lg font-semibold text-xs sm:text-sm outline-none text-slate-700 focus:border-emerald-500">
+                        <option value="">-- Select Definition --</option>
+                        <option value="A">A - to describe something easily</option>
+                        <option value="B">B - famous product/food</option>
+                        <option value="C">C - in or to another country</option>
+                        <option value="D">D - pedestrian road crossing</option>
+                        <option value="E">E - from a certain area</option>
+                    </select>
+                </div>
+
+                <!-- Word 5 -->
+                <div class="p-3.5 bg-white rounded-xl border border-emerald-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <button onclick="speak('specialty')" class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-bold hover:bg-emerald-200 transition-colors">
+                            <i class="fa-solid fa-volume-high mr-1"></i> Listen
+                        </button>
+                        <span class="font-bold text-slate-800 text-base">5. specialty</span>
+                    </div>
+                    <select id="match-5" class="p-2 border-2 border-emerald-200 rounded-lg font-semibold text-xs sm:text-sm outline-none text-slate-700 focus:border-emerald-500">
+                        <option value="">-- Select Definition --</option>
+                        <option value="A">A - to describe something easily</option>
+                        <option value="B">B - famous product/food</option>
+                        <option value="C">C - in or to another country</option>
+                        <option value="D">D - pedestrian road crossing</option>
+                        <option value="E">E - from a certain area</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+                <button onclick="checkVocabMatch()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow">
+                    <i class="fa-solid fa-check mr-1.5"></i> Check Vocabulary
+                </button>
+                <div id="vocabFeedback" class="text-xs font-bold"></div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 2: DIALOGUE & STORY (SECTION 1) -->
+        <div id="content-story" class="hidden soft-card rounded-3xl p-5 sm:p-7 space-y-6">
+            <div class="border-b border-emerald-100 pb-3 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-[#065F46]"><i class="fa-solid fa-comments text-emerald-600 mr-2"></i>2. Story: Greg's Trip to London</h2>
+                    <p class="text-xs text-slate-500">Listen to Greg talking to Tom and Kevin about his trip to London.</p>
+                </div>
+                <button onclick="readDialogue()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 shadow transition-all">
+                    <i class="fa-solid fa-play mr-1"></i> Listen Story
+                </button>
+            </div>
+
+            <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-200 space-y-3 text-sm text-slate-700 leading-relaxed">
+                <p><strong class="text-sky-800">Tom:</strong> Welcome back, Greg! When did you arrive?</p>
+                <p><strong class="text-emerald-800">Greg:</strong> Thanks! We arrived home yesterday afternoon.</p>
+                <p><strong class="text-amber-800">Kevin:</strong> I've never traveled abroad. How was London?</p>
+                <p><strong class="text-emerald-800">Greg:</strong> It was interesting. You see, they speak a bit differently there.</p>
+                <p><strong class="text-sky-800">Tom:</strong> What do you mean?</p>
+                <p><strong class="text-emerald-800">Greg:</strong> Well, on the first day, we went to the tourist information office to get directions to the British Museum. The man there told us that the fastest way to go was by <em>Tube</em>. We didn't understand, so he explained that that's what they call the <em>subway</em>.</p>
+                <p><strong class="text-amber-800">Kevin:</strong> Really? That's funny!</p>
+                <p><strong class="text-emerald-800">Greg:</strong> There's something even funnier. Have you ever heard the phrase "zebra crossing"?</p>
+                <p><strong class="text-sky-800">Tom:</strong> No, I haven't.</p>
+                <p><strong class="text-emerald-800">Greg:</strong> It's the <em>crosswalk</em>! I laughed when I thought about it!</p>
+                <p><strong class="text-emerald-800">Greg:</strong> Yes, I did! I tried "fish and chips". That's fish with <em>fries</em>.</p>
+            </div>
+
+            <!-- Comprehension Question -->
+            <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-3">
+                <h3 class="font-bold text-amber-900 text-sm sm:text-base">
+                    <i class="fa-solid fa-circle-question text-amber-600 mr-1"></i> Question 1: Did Greg have any difficulties in London?
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="gregQOpts">
+                    <button onclick="checkGregQ(1)" id="gregOpt-1" class="p-3 bg-white border border-amber-200 rounded-xl text-left text-xs sm:text-sm font-semibold text-slate-700 hover:bg-amber-100">
+                        Yes, he didn't understand some British English words at first (like Tube, zebra crossing).
+                    </button>
+                    <button onclick="checkGregQ(0)" id="gregOpt-0" class="p-3 bg-white border border-amber-200 rounded-xl text-left text-xs sm:text-sm font-semibold text-slate-700 hover:bg-amber-100">
+                        No, he understood everything instantly without any help.
+                    </button>
+                </div>
+                <div id="gregFeedback" class="text-xs font-bold hidden"></div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 3: US VS UK ENGLISH (EXERCISES 3 & 4 + LOOK BOX) -->
+        <div id="content-usuk" class="hidden soft-card rounded-3xl p-5 sm:p-7 space-y-6">
+            <div class="border-b border-emerald-100 pb-3 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-[#065F46]"><i class="fa-solid fa-flag text-emerald-600 mr-2"></i>3. American vs British English</h2>
+                    <p class="text-xs text-slate-500">Match the American English words with their British English equivalents.</p>
+                </div>
+            </div>
+
+            <!-- LOOK Box: Grammar -->
+            <div class="p-4 bg-amber-50 rounded-2xl border-2 border-amber-200">
+                <span class="bg-amber-300 text-amber-950 px-3 py-0.5 rounded-full text-xs font-extrabold uppercase">LOOK! Box: Grammar</span>
+                <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700 font-semibold">
+                    <div class="p-2.5 bg-white rounded-xl border border-amber-200">
+                        <strong>Present Perfect:</strong> I've watched this movie many times before.
+                    </div>
+                    <div class="p-2.5 bg-white rounded-xl border border-amber-200">
+                        <strong>Past Simple:</strong> I watched it yesterday for the first time.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Words Matching Table (Exercise 3 & 4) -->
+            <div class="space-y-4">
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-xs text-slate-700 font-bold flex flex-wrap gap-2">
+                    <span class="bg-white px-2 py-1 rounded border">holiday</span>
+                    <span class="bg-white px-2 py-1 rounded border">store</span>
+                    <span class="bg-white px-2 py-1 rounded border">sneakers</span>
+                    <span class="bg-white px-2 py-1 rounded border">lorry</span>
+                    <span class="bg-white px-2 py-1 rounded border">trash</span>
+                    <span class="bg-white px-2 py-1 rounded border">lift</span>
+                    <span class="bg-white px-2 py-1 rounded border">trainers</span>
+                    <span class="bg-white px-2 py-1 rounded border">shop</span>
+                    <span class="bg-white px-2 py-1 rounded border">rubbish</span>
+                    <span class="bg-white px-2 py-1 rounded border">vacation</span>
+                    <span class="bg-white px-2 py-1 rounded border">truck</span>
+                    <span class="bg-white px-2 py-1 rounded border">elevator</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Pair 1 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>1. crosswalk (US)</span>
+                        <span class="text-emerald-700 font-bold">= zebra crossing (UK)</span>
+                    </div>
+
+                    <!-- Pair 2 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>2. subway (US)</span>
+                        <input type="text" id="usuk-subway" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+
+                    <!-- Pair 3 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <input type="text" id="usuk-fries" placeholder="US word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                        <span class="text-emerald-700 font-bold">= chips (UK)</span>
+                    </div>
+
+                    <!-- Pair 4 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>4. store (US)</span>
+                        <input type="text" id="usuk-store" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+
+                    <!-- Pair 5 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>5. vacation (US)</span>
+                        <input type="text" id="usuk-vacation" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+
+                    <!-- Pair 6 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>6. sneakers (US)</span>
+                        <input type="text" id="usuk-sneakers" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+
+                    <!-- Pair 7 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>7. trash (US)</span>
+                        <input type="text" id="usuk-trash" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+
+                    <!-- Pair 8 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>8. elevator (US)</span>
+                        <input type="text" id="usuk-elevator" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+
+                    <!-- Pair 9 -->
+                    <div class="p-3 bg-white border border-emerald-100 rounded-xl flex items-center justify-between text-xs sm:text-sm font-semibold">
+                        <span>9. truck (US)</span>
+                        <input type="text" id="usuk-truck" placeholder="UK word" class="w-28 p-1 text-center font-bold text-emerald-800 border border-emerald-300 rounded-md outline-none">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <button onclick="checkUSUK()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow">
+                        <i class="fa-solid fa-check mr-1.5"></i> Check Vocabulary Equivalents
+                    </button>
+                    <div id="usukFeedback" class="text-xs font-bold"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 4: SURVEY PRACTICE (SECTION 5) -->
+        <div id="content-survey" class="hidden soft-card rounded-3xl p-5 sm:p-7 space-y-5">
+            <div class="border-b border-emerald-100 pb-3 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-[#065F46]"><i class="fa-solid fa-clipboard-question text-emerald-600 mr-2"></i>4. Speaking Practice (Have You Ever...?)</h2>
+                    <p class="text-xs text-slate-500">Ask your classmates and record their answers.</p>
+                </div>
+            </div>
+
+            <!-- Speech Model Box -->
+            <div class="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div>
+                    <p class="font-bold text-emerald-900">A: Have you ever traveled abroad?</p>
+                    <p class="font-bold text-sky-800">B: Yes, I have. / Last year, I went to France with my family.</p>
+                </div>
+                <button onclick="speak('Have you ever traveled abroad? Yes I have.')" class="px-3 py-1.5 bg-white border border-emerald-300 rounded-xl text-xs font-bold text-emerald-800 hover:bg-emerald-100">
+                    <i class="fa-solid fa-volume-high mr-1"></i> Practice Speech
+                </button>
+            </div>
+
+            <!-- Survey Table -->
+            <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-white border border-emerald-100 rounded-xl items-center text-xs sm:text-sm">
+                    <span class="font-bold text-slate-800">1. travel abroad?</span>
+                    <input type="text" id="srv-name-1" placeholder="Student Name" class="p-2 border rounded-lg font-semibold text-xs">
+                    <input type="text" id="srv-time-1" placeholder="When did you...?" class="p-2 border rounded-lg font-semibold text-xs">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-white border border-emerald-100 rounded-xl items-center text-xs sm:text-sm">
+                    <span class="font-bold text-slate-800">2. meet a famous person?</span>
+                    <input type="text" id="srv-name-2" placeholder="Student Name" class="p-2 border rounded-lg font-semibold text-xs">
+                    <input type="text" id="srv-time-2" placeholder="When did you...?" class="p-2 border rounded-lg font-semibold text-xs">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-white border border-emerald-100 rounded-xl items-center text-xs sm:text-sm">
+                    <span class="font-bold text-slate-800">3. see a wild animal?</span>
+                    <input type="text" id="srv-name-3" placeholder="Student Name" class="p-2 border rounded-lg font-semibold text-xs">
+                    <input type="text" id="srv-time-3" placeholder="When did you...?" class="p-2 border rounded-lg font-semibold text-xs">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-white border border-emerald-100 rounded-xl items-center text-xs sm:text-sm">
+                    <span class="font-bold text-slate-800">4. do badly on a test?</span>
+                    <input type="text" id="srv-name-4" placeholder="Student Name" class="p-2 border rounded-lg font-semibold text-xs">
+                    <input type="text" id="srv-time-4" placeholder="When did you...?" class="p-2 border rounded-lg font-semibold text-xs">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+                <button onclick="submitSurvey()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow">
+                    <i class="fa-solid fa-save mr-1.5"></i> Save Survey Answers
+                </button>
+                <div id="surveyFeedback" class="text-xs font-bold text-emerald-600 hidden"></div>
+            </div>
+        </div>
+
+        <!-- FINAL SCORE & CERTIFICATE -->
+        <div id="finalCertificate" class="soft-card rounded-3xl p-6 text-center space-y-4">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                <i class="fa-solid fa-award"></i>
+            </div>
+            <h3 class="text-2xl font-black text-[#065F46]">Lesson Completion Certificate</h3>
+            <p class="text-slate-600 font-medium">
+                Student Name: <span id="certStudentName" class="text-emerald-800 font-bold underline">Guest Student</span>
+            </p>
+            <div class="text-3xl font-extrabold text-emerald-600">
+                Final Score: <span id="certScore">0</span> / 15 Points
+            </div>
+            <p class="text-xs text-slate-500">Al-Bayariq Private Schools • Prepared by Mr. Mohamed Abdalla Abo Fahad</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-4 text-xs font-semibold text-slate-500">
+            &copy; AL-BAYARIQ PRIVATE SCHOOLS • Top Stars 6 Grade English Portal
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Engine -->
+    <script>
+        let scoreVocab = 0;
+        let scoreGregQ = 0;
+        let scoreUSUK = 0;
+        let scoreSurvey = 0;
+
+        function updateGlobalScore() {
+            const total = scoreVocab + scoreGregQ + scoreUSUK + scoreSurvey;
+            document.getElementById('globalScoreDisplay').innerText = total;
+            document.getElementById('certScore').innerText = total;
+        }
+
+        function updateStudentName() {
+            const val = document.getElementById('studentName').value.trim();
+            document.getElementById('certStudentName').innerText = val ? val : "Guest Student";
+        }
+
+        function switchTab(tabId) {
+            const tabs = ['vocab', 'story', 'usuk', 'survey'];
+            tabs.forEach(t => {
+                document.getElementById(`content-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('active');
+            });
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const msg = new SpeechSynthesisUtterance(text);
+                msg.lang = 'en-US';
+                msg.rate = 0.85;
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        function readDialogue() {
+            speak("Welcome back, Greg! When did you arrive? We arrived home yesterday afternoon. How was London? It was interesting. They speak a bit differently there. The man told us that the fastest way to go was by Tube, which means subway. And zebra crossing means crosswalk!");
+        }
+
+        // Section 2 Vocabulary Check
+        function checkVocabMatch() {
+            const m1 = document.getElementById('match-1').value;
+            const m2 = document.getElementById('match-2').value;
+            const m3 = document.getElementById('match-3').value;
+            const m4 = document.getElementById('match-4').value;
+            const m5 = document.getElementById('match-5').value;
+
+            let correct = 0;
+            if (m1 === 'C') correct++;
+            if (m2 === 'A') correct++;
+            if (m3 === 'D') correct++;
+            if (m4 === 'E') correct++;
+            if (m5 === 'B') correct++;
+
+            const fb = document.getElementById('vocabFeedback');
+            if (correct === 5) {
+                fb.className = "text-xs font-bold text-emerald-600";
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Excellent! All 5 definitions matched correctly!';
+                scoreVocab = 5;
+            } else {
+                fb.className = "text-xs font-bold text-amber-600";
+                fb.innerHTML = `<i class="fa-solid fa-circle-info mr-1"></i> You got ${correct}/5 correct. Please review your choices!`;
+                scoreVocab = correct;
+            }
+            updateGlobalScore();
+        }
+
+        // Section 1 Greg Question Check
+        function checkGregQ(val) {
+            const fb = document.getElementById('gregFeedback');
+            fb.classList.remove('hidden');
+            const btn1 = document.getElementById('gregOpt-1');
+            const btn0 = document.getElementById('gregOpt-0');
+
+            if (val === 1) {
+                fb.className = "mt-2 text-xs font-bold text-emerald-600";
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Correct! Greg found British terms like Tube and zebra crossing different.';
+                scoreGregQ = 2;
+                btn1.className = "p-3 bg-emerald-50 border-2 border-emerald-500 rounded-xl text-left text-xs sm:text-sm font-bold text-emerald-800";
+            } else {
+                fb.className = "mt-2 text-xs font-bold text-rose-600";
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1"></i> Incorrect. Greg mentioned he did not understand some words at first.';
+                scoreGregQ = 0;
+            }
+            updateGlobalScore();
+        }
+
+        // Section 3 & 4 US vs UK Words Check
+        function checkUSUK() {
+            const subway = document.getElementById('usuk-subway').value.trim().toLowerCase();
+            const fries = document.getElementById('usuk-fries').value.trim().toLowerCase();
+            const store = document.getElementById('usuk-store').value.trim().toLowerCase();
+            const vacation = document.getElementById('usuk-vacation').value.trim().toLowerCase();
+            const sneakers = document.getElementById('usuk-sneakers').value.trim().toLowerCase();
+            const trash = document.getElementById('usuk-trash').value.trim().toLowerCase();
+            const elevator = document.getElementById('usuk-elevator').value.trim().toLowerCase();
+            const truck = document.getElementById('usuk-truck').value.trim().toLowerCase();
+
+            let count = 0;
+            if (subway === 'tube') count++;
+            if (fries === 'fries' || fries === 'french fries') count++;
+            if (store === 'shop') count++;
+            if (vacation === 'holiday') count++;
+            if (sneakers === 'trainers') count++;
+            if (trash === 'rubbish') count++;
+            if (elevator === 'lift') count++;
+            if (truck === 'lorry') count++;
+
+            const fb = document.getElementById('usukFeedback');
+            if (count === 8) {
+                fb.className = "text-xs font-bold text-emerald-600";
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Outstanding! All US vs UK word pairs are correct!';
+                scoreUSUK = 5;
+            } else {
+                fb.className = "text-xs font-bold text-amber-600";
+                fb.innerHTML = `<i class="fa-solid fa-circle-info mr-1"></i> You got ${count}/8 words right. Check word spellings!`;
+                scoreUSUK = Math.round((count / 8) * 5);
+            }
+            updateGlobalScore();
+        }
+
+        // Section 5 Survey Submit
+        function submitSurvey() {
+            const n1 = document.getElementById('srv-name-1').value.trim();
+            const n2 = document.getElementById('srv-name-2').value.trim();
+            const fb = document.getElementById('surveyFeedback');
+
+            if (n1 || n2) {
+                fb.classList.remove('hidden');
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Survey speaking activity saved successfully!';
+                scoreSurvey = 3;
+            } else {
+                fb.classList.remove('hidden');
+                fb.className = "text-xs font-bold text-amber-600";
+                fb.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i> Please fill in at least one classmate entry!';
+                scoreSurvey = 1;
+            }
+            updateGlobalScore();
+        }
+    </script>
+</body>
+</html>
